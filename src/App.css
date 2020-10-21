@@ -2,3 +2,32 @@
   text-align: center;
   min-height: 100vh;
 }
+
+h1 {
+  background-color: #F6343F;
+  color: #fff;
+  font-weight: bold;
+}
+
+input {
+  width: 275px;
+  margin: 20px 10px;
+  border-radius: 10px;
+  padding: 0px 5px
+}
+
+form {
+  width: 90%;
+  text-align: start;
+  margin: auto;
+}
+
+button {
+  background-color:#F6343F;
+  color: #fff;
+  border-radius: 10px;
+  border: none !important;
+  -webkit-box-shadow: 0px 0px 4px rgb(78, 76, 76);
+  -moz-box-shadow: 0px 0px 4px rgb(78, 76, 76);
+  box-shadow: 0px 0px 4px rgb(78, 76, 76);
+}
