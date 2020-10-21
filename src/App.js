@@ -1,11 +1,15 @@
 import React, { useState,useEffect } from 'react'
 import ResultsTable from './componets/ResultsTable/ResultsTable'
+import { filter } from './utils/filter'
+
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 export const App = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
+  const [pageIndex, setPageIndex] = useState(0);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([])
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
@@ -14,6 +18,7 @@ export const App = () => {
     .then(data => data.json())
     .then(data => {
       data.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)
+      setFilteredRestaurants(data)
       setAllRestaurants(data)
     })
     .catch(err => console.log(err));
@@ -21,9 +26,19 @@ export const App = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(searchTerm)
+    let filtered = filter(allRestaurants, searchTerm);
+    console.log(filtered)
 
-    // filter restaurants based on serch term
+    setFilteredRestaurants(filtered.slice(pageIndex, pageIndex+10));
+  }
+
+  const paginate = (e) => {
+    e.preventDefault();
+    if (e.target.id === 'next') {
+      setPageIndex(pageIndex+10);
+    } else if (e.target.id === 'prev' && pageIndex !== 0){
+      setPageIndex(pageIndex-10);
+    }
   }
 
   return (
@@ -40,7 +55,15 @@ export const App = () => {
           Submit
         </button>
       </form>
-      <ResultsTable restaurants={allRestaurants} />
+      <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
+      <div>
+        <button id='prev' onClick={(e) => paginate(e)}>
+          Prev
+        </button>
+        <button id='next' onClick={(e) => paginate(e)}>
+          Next
+        </button>
+      </div>
     </div>
   );
 }
