@@ -9,7 +9,7 @@ export const App = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([])
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
@@ -27,9 +27,8 @@ export const App = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let filtered = filter(allRestaurants, searchTerm);
-    console.log(filtered)
-
-    setFilteredRestaurants(filtered.slice(pageIndex, pageIndex+10));
+    setPageIndex(0);
+    setFilteredRestaurants(filtered);
   }
 
   const paginate = (e) => {
@@ -44,6 +43,7 @@ export const App = () => {
   return (
     <div className="App">
       <h1>Food Finder</h1>
+
       <form onSubmit={handleSubmit}>
         <label htmlFor='search'>Search:</label>
         <input 
@@ -55,7 +55,9 @@ export const App = () => {
           Submit
         </button>
       </form>
+
       <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
+
       <div>
         {pageIndex !== 0 &&
           <button id='prev' onClick={(e) => paginate(e)}>
