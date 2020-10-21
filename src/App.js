@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 export const App = () => {
-  const [restaurants, setRestaurants] = useState([]);
+  const [allRestaurants, setAllRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
 
   useEffect(() => {
@@ -12,7 +12,10 @@ export const App = () => {
       Authorization: `Api-Key q3MNxtfep8Gt`, },
     })
     .then(data => data.json())
-    .then(data => setRestaurants(data))
+    .then(data => {
+      data.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)
+      setAllRestaurants(data)
+    })
     .catch(err => console.log(err));
   }, [])
 
@@ -37,7 +40,7 @@ export const App = () => {
           Submit
         </button>
       </form>
-      <ResultsTable restaurants={restaurants} />
+      <ResultsTable restaurants={allRestaurants} />
     </div>
   );
 }
