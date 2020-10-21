@@ -15,8 +15,8 @@ export const ResultsTable = ({ restaurants }) => {
                 </tr>
             </thead>
             <tbody>
-                {restaurants.map(restaurant => (
-                    <tr key={restaurant.name}>
+                {restaurants.map((restaurant, i) => (
+                    <tr key={restaurant.id}>
                         <td>{restaurant.name}</td>
                         <td>{restaurant.city}</td>
                         <td>{restaurant.state}</td>
