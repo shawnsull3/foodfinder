@@ -1,7 +1,9 @@
 import React, { useState,useEffect } from 'react';
+import ResultsTable from './componets/ResultsTable/ResultsTable';
+
 import './App.css';
 
-const App = () => {
+export const App = () => {
   const [restaurants, setRestaurants] = useState([]);
 
   useEffect(() => {
@@ -16,6 +18,7 @@ const App = () => {
   return (
     <div className="App">
       <h1>Food Finder</h1>
+      <ResultsTable restaurants={restaurants} />
     </div>
   );
 }
