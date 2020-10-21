@@ -1,10 +1,21 @@
-import React from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
+  const [restaurants, setRestaurants] = useState([]);
+
+  useEffect(() => {
+    fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
+      Authorization: `Api-Key q3MNxtfep8Gt`, },
+    })
+    .then(data => data.json())
+    .then(data => setRestaurants(data))
+    .catch(err => console.log(err));
+  }, [])
+
   return (
     <div className="App">
-      Welcome to Food Finder
+      <h1>Food Finder</h1>
     </div>
   );
 }
