@@ -57,12 +57,16 @@ export const App = () => {
       </form>
       <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
       <div>
-        <button id='prev' onClick={(e) => paginate(e)}>
-          Prev
-        </button>
-        <button id='next' onClick={(e) => paginate(e)}>
-          Next
-        </button>
+        {pageIndex !== 0 &&
+          <button id='prev' onClick={(e) => paginate(e)}>
+            Prev
+          </button>
+        }
+        {pageIndex+10 < filteredRestaurants.length && 
+          <button id='next' onClick={(e) => paginate(e)}>
+            Next
+          </button>
+        }
       </div>
     </div>
   );
