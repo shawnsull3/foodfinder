@@ -11,10 +11,10 @@ import './App.css';
 export const App = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
   const [filteredRestaurants, setFilteredRestaurants] = useState([]);
-  const [searchTerm, setSearchTerm] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [availableStates, setAvailableStates] = useState([]);
   const [avialableGenres, setAvailableGenres] = useState([]);
+
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
@@ -31,13 +31,6 @@ export const App = () => {
     .catch(err => console.log(err));
   }, [])
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    let filtered = filter(allRestaurants, searchTerm);
-    setPageIndex(0);
-    setFilteredRestaurants(filtered);
-  }
-
   const paginate = (e) => {
     e.preventDefault();
     if (e.target.id === 'next') {
@@ -52,8 +45,9 @@ export const App = () => {
       <h1>Food Finder</h1>
 
       <FilterForm 
-        handleSubmit={handleSubmit} 
-        setSearchTerm={setSearchTerm}
+        setPageIndex={setPageIndex}
+        setFilteredRestaurants={setFilteredRestaurants}
+        allRestaurants={allRestaurants}
         availableStates={availableStates} 
         avialableGenres={avialableGenres}
       />

@@ -1,12 +1,25 @@
-import React from 'react'
+import React, { useState } from 'react'
+import { filter } from '../../utils/filter'
 import './style.css'
 
 export const FilterForm = ({ 
-    handleSubmit, 
-    setSearchTerm,
+    setPageIndex,
+    setFilteredRestaurants,
+    allRestaurants,
     availableStates,
-    avialableGenres, 
+    avialableGenres,
 }) => {
+    const [searchTerm, setSearchTerm] = useState('');
+    const [selectedState, setSelectedState] = useState('All');
+    const [selectedGenre, setSelectedGenre] = useState('All');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        let filtered = filter(allRestaurants, searchTerm);
+        setPageIndex(0);
+        setFilteredRestaurants(filtered);
+    }
+
     return (
       <form onSubmit={handleSubmit}>
         <div>
@@ -19,7 +32,10 @@ export const FilterForm = ({
         </div>
         <div>
             <label htmlFor='state-select'>Select state:</label>
-            <select id='state-select'>
+            <select 
+              id='state-select' 
+              value={selectedState}
+            >
                 {availableStates.map(state => (
                     <option key={state} value={state}>
                         {state}
@@ -29,7 +45,10 @@ export const FilterForm = ({
         </div>
         <div>
             <label htmlFor='genre-select'>Select genre:</label>
-            <select id='genre-select'>
+            <select 
+              id='genre-select' 
+              value={selectedGenre}
+            >
                 {avialableGenres.map(genre => (
                     <option key={genre} value={genre}>
                         {genre}
