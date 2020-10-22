@@ -28,6 +28,11 @@ button:hover {
   border: 1px solid black;
 }
 
-button:focus, input:focus, button:active, input:active {
+button:focus, 
+button:active, 
+input:focus, 
+input:active,
+select:focus,
+select:active {
   outline: none !important;
 }
