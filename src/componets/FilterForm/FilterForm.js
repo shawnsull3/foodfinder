@@ -4,7 +4,8 @@ import './style.css'
 export const FilterForm = ({ 
     handleSubmit, 
     setSearchTerm,
-    availableStates 
+    availableStates,
+    avialableGenres, 
 }) => {
     return (
       <form onSubmit={handleSubmit}>
@@ -26,7 +27,17 @@ export const FilterForm = ({
                 ))}
             </select>
         </div>
-        
+        <div>
+            <label htmlFor='genre-select'>Select genre:</label>
+            <select id='genre-select'>
+                {avialableGenres.map(genre => (
+                    <option key={genre} value={genre}>
+                        {genre}
+                    </option>
+                ))}
+            </select>
+        </div>
+
         <button type="submit">
           Submit
         </button>

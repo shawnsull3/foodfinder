@@ -3,6 +3,7 @@ import FilterForm from './componets/FilterForm/FilterForm'
 import ResultsTable from './componets/ResultsTable/ResultsTable'
 import { filter } from './utils/filter'
 import { stateOptions } from './utils/stateOptions'
+import { genreOptions } from './utils/genreOptions'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
@@ -13,6 +14,7 @@ export const App = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
   const [availableStates, setAvailableStates] = useState([]);
+  const [avialableGenres, setAvailableGenres] = useState([]);
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
@@ -21,9 +23,10 @@ export const App = () => {
     .then(data => data.json())
     .then(data => {
       data.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0);
-      setAvailableStates(stateOptions(data));
       setFilteredRestaurants(data);
       setAllRestaurants(data);
+      setAvailableStates(stateOptions(data));
+      setAvailableGenres(genreOptions(data));
     })
     .catch(err => console.log(err));
   }, [])
@@ -52,6 +55,7 @@ export const App = () => {
         handleSubmit={handleSubmit} 
         setSearchTerm={setSearchTerm}
         availableStates={availableStates} 
+        avialableGenres={avialableGenres}
       />
 
       <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
