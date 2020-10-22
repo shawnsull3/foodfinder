@@ -66,7 +66,6 @@ export const FilterForm = ({
             </select>
             <button onClick={() => setSelectedGenre('All')} className='reset-btn'>Reset</button>
         </div>
-
         <div>
             <button type="submit" className='submit-btn'>
               Submit

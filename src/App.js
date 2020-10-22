@@ -3,7 +3,6 @@ import FilterForm from './componets/FilterForm/FilterForm'
 import ResultsTable from './componets/ResultsTable/ResultsTable'
 import { stateOptions } from './utils/stateOptions'
 import { genreOptions } from './utils/genreOptions'
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
@@ -13,7 +12,6 @@ export const App = () => {
   const [pageIndex, setPageIndex] = useState(0);
   const [availableStates, setAvailableStates] = useState([]);
   const [avialableGenres, setAvailableGenres] = useState([]);
-
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {

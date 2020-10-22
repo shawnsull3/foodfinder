@@ -15,7 +15,6 @@ export const ResultsTable = ({ restaurants }) => {
                   showDetails={showDetails}
                 />
             }
-
             <Table striped bordered hover variant='dark'>
                 <thead>
                     <tr>

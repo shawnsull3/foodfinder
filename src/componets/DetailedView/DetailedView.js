@@ -2,8 +2,6 @@ import React from 'react'
 import './style.css'
 
 export const DetailedView = ({ restaurant, showDetails }) => {
-    console.log(restaurant);
-
     return (
         <div>
             <div className='modal-cover'>
