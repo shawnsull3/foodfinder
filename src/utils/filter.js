@@ -1,5 +1,4 @@
-export const filter = (restaurantArr, searchTerm) => {
-    // restaurantArr should already be alphabetical
+export const filter = (restaurantArr, searchTerm, selectedState, selectedGenre) => {
     searchTerm = searchTerm.toLowerCase();
     let filtered = [];
 
@@ -8,8 +7,12 @@ export const filter = (restaurantArr, searchTerm) => {
     }
 
     for (let i = 0; i < restaurantArr.length; i++) {
-        if (contains(restaurantArr[i].name) || contains(restaurantArr[i].city) || contains(restaurantArr[i].genre)) {
-            filtered.push(restaurantArr[i]);
+        if (selectedState === restaurantArr[i].state || selectedState === 'All') {
+            if (restaurantArr[i].genre.indexOf(selectedGenre) !== -1 || selectedGenre === 'All') {
+                if (contains(restaurantArr[i].name) || contains(restaurantArr[i].city) || contains(restaurantArr[i].genre)) {
+                    filtered.push(restaurantArr[i]);
+                }
+            }
         }
     }
     return filtered;
