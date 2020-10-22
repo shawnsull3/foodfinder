@@ -2,3 +2,7 @@
     width: 90% !important;
     margin: auto;
 }
+
+th {
+    background-color: #F6343F;
+}
