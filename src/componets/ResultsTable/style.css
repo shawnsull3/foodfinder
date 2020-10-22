@@ -6,3 +6,7 @@
 th {
     background-color: #F6343F;
 }
+
+tr td:hover {
+    cursor: pointer;
+}
