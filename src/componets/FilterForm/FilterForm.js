@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { filter } from '../../utils/filter'
 import './style.css'
 
@@ -14,20 +14,26 @@ export const FilterForm = ({
     const [selectedGenre, setSelectedGenre] = useState('All');
 
     const handleSubmit = (e) => {
-        e.preventDefault();
-        let filtered = filter(allRestaurants, searchTerm);
+        e.preventDefault(e);
+        let filtered = filter(allRestaurants, searchTerm, selectedState, selectedGenre);
         setPageIndex(0);
         setFilteredRestaurants(filtered);
     }
+
+    useEffect(() => {
+        let filtered = filter(allRestaurants, searchTerm, selectedState, selectedGenre);
+        setPageIndex(0);
+        setFilteredRestaurants(filtered);
+    }, [searchTerm, selectedState, selectedGenre])
 
     return (
       <form onSubmit={handleSubmit}>
         <div>
             <label htmlFor='search'>Search:</label>
             <input 
-            id='search'
-            onChange={(e) => setSearchTerm(e.target.value)}
-            placeholder='Enter restaurant name, city or genre'
+              id='search'
+              onChange={(e) => setSearchTerm(e.target.value)}
+              placeholder='Enter restaurant name, city or genre'
             />
         </div>
         <div>
@@ -35,6 +41,7 @@ export const FilterForm = ({
             <select 
               id='state-select' 
               value={selectedState}
+              onChange={e => setSelectedState(e.target.value)}
             >
                 {availableStates.map(state => (
                     <option key={state} value={state}>
@@ -42,12 +49,14 @@ export const FilterForm = ({
                     </option>
                 ))}
             </select>
+            <button onClick={() => setSelectedState('All')} className='reset-btn'>Reset</button>
         </div>
         <div>
             <label htmlFor='genre-select'>Select genre:</label>
             <select 
               id='genre-select' 
               value={selectedGenre}
+              onChange={e => setSelectedGenre(e.target.value)}
             >
                 {avialableGenres.map(genre => (
                     <option key={genre} value={genre}>
@@ -55,11 +64,14 @@ export const FilterForm = ({
                     </option>
                 ))}
             </select>
+            <button onClick={() => setSelectedGenre('All')} className='reset-btn'>Reset</button>
         </div>
 
-        <button type="submit">
-          Submit
-        </button>
+        <div>
+            <button type="submit" className='submit-btn'>
+              Submit
+            </button>
+        </div>
       </form>
     )
 }
