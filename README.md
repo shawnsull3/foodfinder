@@ -4,7 +4,7 @@ This site allows users to find and filter through a list of restaurants obtained
 
 ## Deployed site
 
-You can find the deployed version [here] (https://vibrant-snyder-6a89fd.netlify.app/). Otherwise you can run the scripts below to build your own production app or run a dev server.
+You can find the deployed version [here](https://vibrant-snyder-6a89fd.netlify.app/). Otherwise you can run the scripts below to build your own production app or run a dev server.
 
 
 ## Available Scripts
