@@ -21,5 +21,12 @@ select {
     padding: 3px 5px
 }
 
+.reset-btn {
+    margin-left: 10px;
+}
+
+.submit-btn {
+    margin: 10px
+}
 
   
