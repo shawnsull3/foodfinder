@@ -1,7 +1,6 @@
 import React, { useState,useEffect } from 'react'
 import FilterForm from './componets/FilterForm/FilterForm'
 import ResultsTable from './componets/ResultsTable/ResultsTable'
-import { filter } from './utils/filter'
 import { stateOptions } from './utils/stateOptions'
 import { genreOptions } from './utils/genreOptions'
 
@@ -52,7 +51,14 @@ export const App = () => {
         avialableGenres={avialableGenres}
       />
 
-      <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
+      {filteredRestaurants.length === 0 
+        ? 
+        <div>
+          <h2>Sorry, no matches found.</h2>
+        </div>
+        :
+        <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
+      }
 
       <div>
         {pageIndex !== 0 &&
