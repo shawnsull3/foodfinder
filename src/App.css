@@ -9,20 +9,6 @@ h1 {
   font-weight: bold;
 }
 
-input {
-  width: 275px;
-  margin: 20px 10px;
-  border: 1px solid black;
-  border-radius: 10px;
-  padding: 0px 5px
-}
-
-form {
-  width: 90%;
-  text-align: start;
-  margin: auto;
-}
-
 button {
   background-color:#F6343F;
   color: #fff;

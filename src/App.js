@@ -1,15 +1,18 @@
 import React, { useState,useEffect } from 'react'
+import FilterForm from './componets/FilterForm/FilterForm'
 import ResultsTable from './componets/ResultsTable/ResultsTable'
 import { filter } from './utils/filter'
+import { stateOptions } from './utils/stateOptions'
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 
 export const App = () => {
   const [allRestaurants, setAllRestaurants] = useState([]);
+  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
   const [searchTerm, setSearchTerm] = useState('');
   const [pageIndex, setPageIndex] = useState(0);
-  const [filteredRestaurants, setFilteredRestaurants] = useState([]);
+  const [availableStates, setAvailableStates] = useState([]);
 
   useEffect(() => {
     fetch(`https://code-challenge.spectrumtoolbox.com/api/restaurants`, { headers: {
@@ -17,9 +20,10 @@ export const App = () => {
     })
     .then(data => data.json())
     .then(data => {
-      data.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0)
-      setFilteredRestaurants(data)
-      setAllRestaurants(data)
+      data.sort((a, b) => (a.name < b.name) ? -1 : (a.name > b.name) ? 1 : 0);
+      setAvailableStates(stateOptions(data));
+      setFilteredRestaurants(data);
+      setAllRestaurants(data);
     })
     .catch(err => console.log(err));
   }, [])
@@ -44,17 +48,7 @@ export const App = () => {
     <div className="App">
       <h1>Food Finder</h1>
 
-      <form onSubmit={handleSubmit}>
-        <label htmlFor='search'>Search:</label>
-        <input 
-          id='search'
-          onChange={(e) => setSearchTerm(e.target.value)}
-          placeholder='Enter restaurant name, city or genre'
-        />
-        <button type="submit">
-          Submit
-        </button>
-      </form>
+      <FilterForm handleSubmit={handleSubmit} setSearchTerm={setSearchTerm} />
 
       <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
 
