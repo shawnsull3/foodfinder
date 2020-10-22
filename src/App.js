@@ -48,7 +48,11 @@ export const App = () => {
     <div className="App">
       <h1>Food Finder</h1>
 
-      <FilterForm handleSubmit={handleSubmit} setSearchTerm={setSearchTerm} />
+      <FilterForm 
+        handleSubmit={handleSubmit} 
+        setSearchTerm={setSearchTerm}
+        availableStates={availableStates} 
+      />
 
       <ResultsTable restaurants={filteredRestaurants.slice(pageIndex, pageIndex+10)} />
 
