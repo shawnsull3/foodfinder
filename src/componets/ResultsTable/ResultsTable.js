@@ -15,15 +15,18 @@ export const ResultsTable = ({ restaurants }) => {
                 </tr>
             </thead>
             <tbody>
-                {restaurants.map((restaurant, i) => (
-                    <tr key={restaurant.id}>
-                        <td>{restaurant.name}</td>
-                        <td>{restaurant.city}</td>
-                        <td>{restaurant.state}</td>
-                        <td>{restaurant.telephone}</td>
-                        <td>{restaurant.genre}</td>
-                    </tr>
-                ))}
+                {restaurants.map((restaurant, i) => {
+                    const spacedGenres = restaurant.genre.split(',').join(', ');
+                    return (
+                        <tr key={restaurant.id}>
+                            <td>{restaurant.name}</td>
+                            <td>{restaurant.city}</td>
+                            <td>{restaurant.state}</td>
+                            <td>{restaurant.telephone}</td>
+                            <td>{spacedGenres}</td>
+                        </tr>
+                    )
+                })}
             </tbody>
         </Table >
     )
