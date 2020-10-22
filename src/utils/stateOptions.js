@@ -7,6 +7,7 @@ export const stateOptions = (restaurantArr) => {
         }
     }
     let sortedStates = Object.keys(statesObj).sort();
+    sortedStates.unshift('All')
     return sortedStates;
 }
 
